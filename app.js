@@ -19,7 +19,7 @@ app.use(cookieParser());
 const csrfProtection = csrf({ cookie: true });
 
 app.get('/', (req, res) => {
-  res.send('hello');
+  res.render('index');
 });
 
 app.listen(process.env.PORT || 8080, () => {

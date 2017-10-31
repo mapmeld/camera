@@ -1,62 +1,72 @@
-<ul id='readout'>
-</ul>
-<script>
-let readout = document.getElementById('readout');
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>Camera Examples</title>
+  </head>
+  <body>
+    <ul id='readout'>
+    </ul>
+    <script>
+    let readout = document.getElementById('readout');
 
-navigator.mediaDevices.getUserMedia({video: true})
-  .then(mediaStream => {
-    let tracks = mediaStream.getVideoTracks();
-    if (!tracks.length) {
-      let li = document.createElement('li');
-      li.innerHTML = "no camera";
-      readout.appendChild(li);
-    } else {
-      tracks.forEach(track => {
+    navigator.mediaDevices.getUserMedia({video: true})
+      .then(mediaStream => {
+        let tracks = mediaStream.getVideoTracks();
+        if (!tracks.length) {
+          let li = document.createElement('li');
+          li.innerHTML = "no camera";
+          readout.appendChild(li);
+        } else {
+          tracks.forEach(track => {
+            let li = document.createElement('li');
+            li.innerHTML = JSON.stringify({
+              label: track.label,
+              readyState: track.readyState,
+              enabled: track.enabled,
+              muted: track.muted,
+              id: track.id,
+              kind: track.kind,
+            });
+            readout.appendChild(li);
+          });
+        }
+      })
+      .catch(err => {
         let li = document.createElement('li');
-        li.innerHTML = JSON.stringify({
-          label: track.label,
-          readyState: track.readyState,
-          enabled: track.enabled,
-          muted: track.muted,
-          id: track.id,
-          kind: track.kind,
-        });
+        li.innerHTML = "standard camera: " + err.name + ": " + err.message;
         readout.appendChild(li);
       });
-    }
-  })
-  .catch(err => {
-    let li = document.createElement('li');
-    li.innerHTML = "standard camera: " + err.name + ": " + err.message;
-    readout.appendChild(li);
-  });
 
-navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } } })
-.then(mediaStream => {
-  let tracks = mediaStream.getVideoTracks();
-  if (!tracks.length) {
-    let li = document.createElement('li');
-    li.innerHTML = "no environment camera";
-    readout.appendChild(li);
-  } else {
-    tracks.forEach(track => {
+    navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } } })
+    .then(mediaStream => {
+      let tracks = mediaStream.getVideoTracks();
+      if (!tracks.length) {
+        let li = document.createElement('li');
+        li.innerHTML = "no environment camera";
+        readout.appendChild(li);
+      } else {
+        tracks.forEach(track => {
+          let li = document.createElement('li');
+          li.innerHTML = JSON.stringify({
+            label: track.label,
+            readyState: track.readyState,
+            enabled: track.enabled,
+            muted: track.muted,
+            id: track.id,
+            kind: track.kind,
+          });
+          readout.appendChild(li);
+        });
+      }
+    })
+    .catch(err => {
       let li = document.createElement('li');
-      li.innerHTML = JSON.stringify({
-        label: track.label,
-        readyState: track.readyState,
-        enabled: track.enabled,
-        muted: track.muted,
-        id: track.id,
-        kind: track.kind,
-      });
+      li.innerHTML = "environment camera: " + err.name + ": " + err.message;
       readout.appendChild(li);
     });
-  }
-})
-.catch(err => {
-  let li = document.createElement('li');
-  li.innerHTML = "environment camera: " + err.name + ": " + err.message;
-  readout.appendChild(li);
-});
 
-</script>
+    </script>
+  </body>
+</html>

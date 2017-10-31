@@ -1,9 +1,19 @@
-<video id="video">  </video>
-<script>
-let video = document.getElementById("video");
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function(stream) {
-        video.srcObject = stream;
-        video.onloadedmetadata = video.play;
-    });
-</script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>Camera Examples</title>
+  </head>
+  <body>
+    <video id="video">  </video>
+    <script>
+    let video = document.getElementById("video");
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            video.srcObject = stream;
+            video.onloadedmetadata = video.play;
+        });
+    </script>
+  </body>
+</html>

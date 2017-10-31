@@ -1,23 +1,33 @@
-<img id="photo"/>
-<button onclick="snap()">Photo</button>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>Camera Examples</title>
+  </head>
+  <body>
+    <img id="photo"/>
+    <button onclick="snap()">Photo</button>
 
-<script src="/scripts/imagecapture.js"></script>
+    <script src="/scripts/imagecapture.js"></script>
 
-<script>
-var imageCapture, img = document.getElementById('photo');
+    <script>
+    var imageCapture, img = document.getElementById('photo');
 
-navigator.mediaDevices.getUserMedia({video: true})
-  .then(mediaStream => {
-    console.log(mediaStream.getVideoTracks());
-    let mediaStreamTrack = mediaStream.getVideoTracks()[0];
-    imageCapture = new ImageCapture(mediaStreamTrack);
-  });
+    navigator.mediaDevices.getUserMedia({video: true})
+      .then(mediaStream => {
+        console.log(mediaStream.getVideoTracks());
+        let mediaStreamTrack = mediaStream.getVideoTracks()[0];
+        imageCapture = new ImageCapture(mediaStreamTrack);
+      });
 
 
-function snap() {
-  imageCapture.takePhoto()
-    .then(blob => {
-      img.src = URL.createObjectURL(blob);
-    });
-}
-</script>
+    function snap() {
+      imageCapture.takePhoto()
+        .then(blob => {
+          img.src = URL.createObjectURL(blob);
+        });
+    }
+    </script>
+  </body>
+</html>
