@@ -10,18 +10,31 @@
   <body>
     <ul id='readout'>
     </ul>
+
     <script>
+    // just make a list of camera devices
     let readout = document.getElementById('readout');
 
+    // any cameras
     navigator.mediaDevices.getUserMedia({video: true})
       .then(mediaStream => {
+
         let tracks = mediaStream.getVideoTracks();
+
         if (!tracks.length) {
           let li = document.createElement('li');
-          li.innerHTML = "no camera";
+          li.innerHTML = "no cameras";
           readout.appendChild(li);
+
         } else {
+          var index = 1;
           tracks.forEach(track => {
+            let h2 = document.createElement('h2');
+            h2.innerHTML = 'Camera ' + index;
+            readout.appendChild(h2);
+            index++;
+
+            // list known info for this camera
             let li = document.createElement('li');
             li.innerHTML = JSON.stringify({
               label: track.label,
@@ -32,14 +45,17 @@
               kind: track.kind,
             });
 
+            // list known capabilities
+            // (currently returns empty object)
             let cap = track.getCapabilities();
-            console.log(cap);
 
             let imageCapture = new ImageCapture(track);
             imageCapture.getPhotoCapabilities()
               .then((caps) => {
+                // list known capabilities
+                // can't just do JSON.stringify on the original object :(
                 let s1 = document.createElement('div');
-                s1.innerHTML = 'Photo capabilities: ' + JSON.stringify({
+                s1.innerHTML = '<strong>Photo capabilities:</strong> ' + JSON.stringify({
                   fillLightMode: JSON.stringify(caps.fillLightMode),
                   imageHeight: {
                     max: caps.imageHeight.max,
@@ -56,8 +72,10 @@
                 li.appendChild(s1);
               })
               .then((photoSettings) => {
+                // list known PhotoSettings
+                // currently returns blank for me
                 let s2 = document.createElement('div');
-                s2.innerHTML = 'Photo Settings: ' + JSON.stringify(photoSettings);
+                s2.innerHTML = '<strong>Photo Settings:</strong> ' + JSON.stringify(photoSettings);
                 li.appendChild(s2);
               })
               .catch(error => console.error('Error getting camera capabilities and settings:', error));
@@ -72,33 +90,44 @@
         readout.appendChild(li);
       });
 
+    // list only rear / environment cameras
     navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } } })
-    .then(mediaStream => {
-      let tracks = mediaStream.getVideoTracks();
-      if (!tracks.length) {
-        let li = document.createElement('li');
-        li.innerHTML = "no environment camera";
-        readout.appendChild(li);
-      } else {
-        tracks.forEach(track => {
+      .then(mediaStream => {
+        let tracks = mediaStream.getVideoTracks();
+        if (!tracks.length) {
+          // display empty list
           let li = document.createElement('li');
-          li.innerHTML = JSON.stringify({
-            label: track.label,
-            readyState: track.readyState,
-            enabled: track.enabled,
-            muted: track.muted,
-            id: track.id,
-            kind: track.kind,
-          });
+          li.innerHTML = "no environment / rear cameras";
           readout.appendChild(li);
-        });
-      }
-    })
-    .catch(err => {
-      let li = document.createElement('li');
-      li.innerHTML = "environment camera: " + err.name + ": " + err.message;
-      readout.appendChild(li);
-    });
+        } else {
+          let index = 1;
+          tracks.forEach(track => {
+            let h2 = document.createElement('h2');
+            h2.innerHTML = 'Rear Camera ' + index;
+            readout.appendChild(h2);
+            index++;
+
+            // list known properties
+            // can't just do JSON.stringify on the original object :(
+            let li = document.createElement('li');
+            li.innerHTML = JSON.stringify({
+              label: track.label,
+              readyState: track.readyState,
+              enabled: track.enabled,
+              muted: track.muted,
+              id: track.id,
+              kind: track.kind,
+            });
+            readout.appendChild(li);
+          });
+        }
+      })
+      .catch(err => {
+        // display the error
+        let li = document.createElement('li');
+        li.innerHTML = "no environment / rear cameras: " + err.name + ": " + err.message;
+        readout.appendChild(li);
+      });
 
     </script>
   </body>

@@ -8,23 +8,37 @@
     <link rel="stylesheet" href="/style.css"/>
   </head>
   <body>
-    <video id="video">  </video>
+    <video id="video" autoplay>  </video>
+
+    <!-- adding a visual canvas to display the captured image
+       getUserMedia() requires <canvas> element to do this, until ImageCapture API is available
+       <canvas> could be a JS variable or display:none element, instead of a visible HTML element
+    -->
     <canvas id="canvas">  </canvas>
-    <button onclick="snap()">Photo</button>
+
+    <!--
+      style the shutter (obturador) button in static/style.css
+    -->
+    <button class="shutter" onclick="snap()">Photo</button>
 
     <script>
-    let video = document.getElementById("video");
+    let video = document.getElementById("video"),
+        c = document.getElementById('canvas'),
+        ctx = c.getContext('2d');
+
+    // start showing video feed
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(function(stream) {
             video.srcObject = stream;
-            video.onloadedmetadata = video.play;
         });
 
+    // button pressed!
     function snap() {
-      let c = document.getElementById('canvas');
+      // make canvas and video same size - no distortion
       c.width = video.offsetWidth;
       c.height = video.offsetHeight;
-      let ctx = c.getContext('2d');
+
+      // canvas drawing
       ctx.drawImage(video, 0, 0);
     }
     </script>

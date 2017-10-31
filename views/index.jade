@@ -7,15 +7,22 @@ html
     script(src="/scripts/force-https.js")
     link(rel="stylesheet", href="/style.css")
   body
+    h1 Fun with getUserMedia() Workshop
+    h3 blue-camera.herokuapp.com
     ul
       li
         a(href="/camera/camera-1.html") Camera-1: Video
+        span show a video stream from my main camera
       li
         a(href="/camera/camera-2.html") Camera-2: Snapshots
+        span save a photo from my main camera's video stream
       li
         a(href="/camera/camera-3.html") Camera-3: ImageCapture
+        span use the new ImageCapture API to save a photo
       li
         a(href="/camera/camera-4.html") Camera-4: Metadata
+        span see the options for all of my cameras in the ImageCapture API
       hr
       li
         a(href="/projects/reverse-facebook.html") Reverse Facebook
+        span require the user to submit a photo to join the network

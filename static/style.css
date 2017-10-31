@@ -12,6 +12,10 @@ li {
   margin-bottom: 12px;
 }
 
+li > a {
+  display: block;
+}
+
 .face {
   width: 300px;
   display: inline-block;

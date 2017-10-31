@@ -11,11 +11,14 @@
     <img id="photo"/>
     <button onclick="snap()">Photo</button>
 
+    <!-- ImageCapture polyfill for non-Chrome, non-Opera browsers -->
     <script src="/scripts/imagecapture.js"></script>
 
     <script>
-    var imageCapture, img = document.getElementById('photo');
+    let imageCapture = null,
+        img = document.getElementById('photo');
 
+    // let's look at a particular video track (could be multiple)
     navigator.mediaDevices.getUserMedia({video: true})
       .then(mediaStream => {
         let mediaStreamTrack = mediaStream.getVideoTracks()[0];
@@ -24,10 +27,14 @@
 
 
     function snap() {
+      // <canvas> is no longer needed - use takePhoto() to halt video stream
+      // uses full-res capabilities of cameras
       imageCapture.takePhoto()
         .then(blob => {
           img.src = URL.createObjectURL(blob);
         });
+
+      // another function, grabFrame(), goes directly to the video
     }
     </script>
   </body>

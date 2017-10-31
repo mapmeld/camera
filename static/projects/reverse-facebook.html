@@ -13,12 +13,13 @@
     <canvas id="canvas"></canvas>
     <button onclick="snap()">Photo</button>
 
+    <!-- the button programmatically submits this hidden form -->
     <button id="login" onclick="login()">log in with photo</button>
-
     <form id="form" action="/login" method="POST">
       <input id="photo" name="photo" type="hidden"/>
     </form>
 
+    <!-- ImageCapture polyfill -->
     <script src="/scripts/imagecapture.js"></script>
 
     <script>
@@ -26,6 +27,7 @@
     c = document.getElementById('canvas'),
     tookPhoto = false;
 
+    // set up ImageCapture
     navigator.mediaDevices.getUserMedia({video: true})
       .then(mediaStream => {
         let mediaStreamTrack = mediaStream.getVideoTracks()[0];
@@ -33,6 +35,7 @@
       });
 
 
+    // take frame using ImageCapture's grabFrame function
     function snap() {
       imageCapture.grabFrame()
         .then(imageBitmap => {
@@ -43,6 +46,9 @@
         });
     }
 
+    // programattically submit the form
+    // submit the photo using a Data URI - canvasElement.toDataURL()
+    // don't submit if the user hasn't taken a photo yet
     function login() {
       if (tookPhoto) {
         document.getElementById('photo').value = c.toDataURL();
