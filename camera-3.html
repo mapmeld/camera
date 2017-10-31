@@ -1,19 +1,23 @@
-<video id="video">  </video>
+<img id="photo"/>
 <button onclick="snap()">Photo</button>
 
-<script>
-let video = document.getElementById("video");
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function(stream) {
-        video.srcObject = stream;
-        video.onloadedmetadata = video.play;
-    });
+<script src="/scripts/imagecapture.js"></script>
 
-let c = document.createElement('canvas');
-let ctx = c.getContext('2d');
+<script>
+var imageCapture, img = document.getElementById('photo');
+
+navigator.mediaDevices.getUserMedia({video: true})
+  .then(mediaStream => {
+    console.log(mediaStream.getVideoTracks());
+    let mediaStreamTrack = mediaStream.getVideoTracks()[0];
+    imageCapture = new ImageCapture(mediaStreamTrack);
+  });
+
+
 function snap() {
-  c.width = video.offsetWidth;
-  c.height = video.offsetHeight;
-  ctx.drawImage(video, 0, 0);
+  imageCapture.takePhoto()
+    .then(blob => {
+      img.src = URL.createObjectURL(blob);
+    });
 }
 </script>

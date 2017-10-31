@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-export let ImageCapture = window.ImageCapture;
+//export let ImageCapture = window.ImageCapture;
 
 if (typeof ImageCapture === 'undefined') {
   ImageCapture = class {

@@ -1,0 +1,22 @@
+<ul id='readout'>
+</ul>
+<script>
+let readout = document.getElementById('readout');
+
+navigator.mediaDevices.getUserMedia({video: true})
+  .then(mediaStream => {
+    let tracks = mediaStream.getVideoTracks();
+    tracks.forEach(track => {
+      let li = document.createElement('li');
+      li.innerHTML = JSON.stringify({
+        label: track.label,
+        readyState: track.readyState,
+        enabled: track.enabled,
+        muted: track.muted,
+        id: track.id,
+        kind: track.kind,
+      });
+      readout.appendChild(li);
+    });
+  });
+</script>
