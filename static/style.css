@@ -1,0 +1,13 @@
+html, body {
+  font-family: sans-serif;
+}
+
+button {
+  font-size: 18pt;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+li {
+  margin-bottom: 12px;
+}
