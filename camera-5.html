@@ -1,0 +1,27 @@
+<h1>Reverse Facebook</h1>
+
+<img id="photo"/>
+<button onclick="snap()">Photo</button>
+
+<button id="login" onclick="login()">log in with photo</button>
+
+<script src="/scripts/imagecapture.js"></script>
+
+<script>
+var imageCapture, img = document.getElementById('photo');
+
+navigator.mediaDevices.getUserMedia({video: true})
+  .then(mediaStream => {
+    console.log(mediaStream.getVideoTracks());
+    let mediaStreamTrack = mediaStream.getVideoTracks()[0];
+    imageCapture = new ImageCapture(mediaStreamTrack);
+  });
+
+
+function snap() {
+  imageCapture.takePhoto()
+    .then(blob => {
+      img.src = URL.createObjectURL(blob);
+    });
+}
+</script>

@@ -1,0 +1,27 @@
+{
+  "name": "fun-with-getusermedia",
+  "version": "1.0.0",
+  "description": "Examples for fun getUserMedia and ImageCapture projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapmeld/camera.git"
+  },
+  "keywords": [
+    "camera",
+    "getusermedia",
+    "imagecapture"
+  ],
+  "author": "Nick Doiron <ndoiron@mapmeld.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mapmeld/camera/issues"
+  },
+  "homepage": "https://github.com/mapmeld/camera#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
