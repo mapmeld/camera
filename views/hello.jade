@@ -1,0 +1,19 @@
+doctype
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=no")
+    title Camera Examples
+    script(src="/scripts/force-https.js")
+    link(rel="stylesheet", href="/style.css")
+  body
+    h1 Welcome to Reverse Facebook
+
+    for face in faces
+      .face
+        img(src=face.url)
+        small= face.time
+
+    br
+    br
+    a(href="/clear") Clear Images

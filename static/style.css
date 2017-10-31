@@ -11,3 +11,12 @@ button {
 li {
   margin-bottom: 12px;
 }
+
+.face {
+  width: 300px;
+  display: inline-block;
+}
+
+.face img {
+  max-width: 280px;
+}

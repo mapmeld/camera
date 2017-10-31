@@ -8,25 +8,14 @@ Plus some fun with TensorFlow, audio and video tags
 
 ## Dependencies
 
-You need to install OpenCV (version 2) before installing opencv and other JS modules from NPM.
+You need to install dependencies before JS modules from NPM
+
+Node-Canvas installation help: https://github.com/Automattic/node-canvas/wiki
 
 ```bash
-brew install opencv@2
+brew install cairo  # on OSX
 npm install
 npm start
-```
-
-On Heroku, go to the Settings panel and add these buildpacks in this order:
-
-```
-https://github.com/automata/heroku-buildpack-opencv.git
-heroku/nodejs
-```
-
-Then push your code up.
-
-```
-git push heroku master
 ```
 
 ## License
