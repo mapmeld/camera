@@ -6,6 +6,39 @@ let readout = document.getElementById('readout');
 navigator.mediaDevices.getUserMedia({video: true})
   .then(mediaStream => {
     let tracks = mediaStream.getVideoTracks();
+    if (!tracks.length) {
+      let li = document.createElement('li');
+      li.innerHTML = "no camera";
+      readout.appendChild(li);
+    } else {
+      tracks.forEach(track => {
+        let li = document.createElement('li');
+        li.innerHTML = JSON.stringify({
+          label: track.label,
+          readyState: track.readyState,
+          enabled: track.enabled,
+          muted: track.muted,
+          id: track.id,
+          kind: track.kind,
+        });
+        readout.appendChild(li);
+      });
+    }
+  })
+  .catch(err => {
+    let li = document.createElement('li');
+    li.innerHTML = "standard camera: " + err.name + ": " + err.message;
+    readout.appendChild(li);
+  });
+
+navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } } })
+.then(mediaStream => {
+  let tracks = mediaStream.getVideoTracks();
+  if (!tracks.length) {
+    let li = document.createElement('li');
+    li.innerHTML = "no environment camera";
+    readout.appendChild(li);
+  } else {
     tracks.forEach(track => {
       let li = document.createElement('li');
       li.innerHTML = JSON.stringify({
@@ -18,5 +51,12 @@ navigator.mediaDevices.getUserMedia({video: true})
       });
       readout.appendChild(li);
     });
-  });
+  }
+})
+.catch(err => {
+  let li = document.createElement('li');
+  li.innerHTML = "environment camera: " + err.name + ": " + err.message;
+  readout.appendChild(li);
+});
+
 </script>
