@@ -18,7 +18,6 @@
 
     navigator.mediaDevices.getUserMedia({video: true})
       .then(mediaStream => {
-        console.log(mediaStream.getVideoTracks());
         let mediaStreamTrack = mediaStream.getVideoTracks()[0];
         imageCapture = new ImageCapture(mediaStreamTrack);
       });

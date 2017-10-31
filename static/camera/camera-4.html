@@ -31,6 +31,37 @@
               id: track.id,
               kind: track.kind,
             });
+
+            let cap = track.getCapabilities();
+            console.log(cap);
+
+            let imageCapture = new ImageCapture(track);
+            imageCapture.getPhotoCapabilities()
+              .then((caps) => {
+                let s1 = document.createElement('div');
+                s1.innerHTML = 'Photo capabilities: ' + JSON.stringify({
+                  fillLightMode: JSON.stringify(caps.fillLightMode),
+                  imageHeight: {
+                    max: caps.imageHeight.max,
+                    min: caps.imageHeight.min,
+                    step: caps.imageHeight.step
+                  },
+                  imageWidth: {
+                    max: caps.imageWidth.max,
+                    min: caps.imageWidth.min,
+                    step: caps.imageWidth.step
+                  },
+                  redEyeReduction: caps.redEyeReduction
+                });
+                li.appendChild(s1);
+              })
+              .then((photoSettings) => {
+                let s2 = document.createElement('div');
+                s2.innerHTML = 'Photo Settings: ' + JSON.stringify(photoSettings);
+                li.appendChild(s2);
+              })
+              .catch(error => console.error('Error getting camera capabilities and settings:', error));
+
             readout.appendChild(li);
           });
         }

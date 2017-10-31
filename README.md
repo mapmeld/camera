@@ -18,6 +18,15 @@ npm install
 npm start
 ```
 
+#### Heroku install
+
+```bash
+heroku stack:set cedar-14
+heroku buildpacks:add --index 1 https://github.com/mojodna/heroku-buildpack-cairo.git
+heroku addons:add mongolab
+git push heroku master
+```
+
 ## License
 
 Open source, MIT license
