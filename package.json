@@ -22,6 +22,14 @@
   },
   "homepage": "https://github.com/mapmeld/camera#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "connect-mongo": "^2.0.0",
+    "cookie-parser": "^1.4.3",
+    "csurf": "^1.9.0",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "jade": "^1.11.0",
+    "mongoose": "^4.12.5"
   }
 }
