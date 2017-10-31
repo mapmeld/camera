@@ -1,0 +1,20 @@
+<video id="video">  </video>
+<canvas id="canvas">  </canvas>
+<button onclick="snap()">Photo</button>
+
+<script>
+let video = document.getElementById("video");
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(stream) {
+        video.srcObject = stream;
+        video.onloadedmetadata = video.play;
+    });
+
+function snap() {
+  let c = document.getElementById('canvas');
+  c.width = video.offsetWidth;
+  c.height = video.offsetHeight;
+  let ctx = c.getContext('2d');
+  ctx.drawImage(video, 0, 0);
+}
+</script>

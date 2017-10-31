@@ -1,0 +1,9 @@
+<video id="video">  </video>
+<script>
+let video = document.getElementById("video");
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(stream) {
+        video.srcObject = stream;
+        video.onloadedmetadata = video.play;
+    });
+</script>
