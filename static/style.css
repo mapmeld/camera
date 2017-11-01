@@ -24,3 +24,7 @@ li > a {
 .face img {
   max-width: 280px;
 }
+
+video, canvas, img {
+  max-width: 100%;
+}
