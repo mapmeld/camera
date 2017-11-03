@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 // face-detection module
 // read requirements for installing node-canvas: https://github.com/Automattic/node-canvas/wiki
 // on Heroku see README or: https://github.com/mojodna/heroku-buildpack-cairo/issues/16
-const fdetect = require('face-detect');
-const Canvas = require('canvas');
+//const fdetect = require('face-detect');
+//const Canvas = require('canvas');
 
 // MongoDB database model
 mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGODB_URI || 'localhost');
@@ -96,7 +96,7 @@ app.post('/login', (req, res) => {
 });
 
 // start the server
-app.listen(process.env.PORT || 8080, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log('app is running');
 });
 

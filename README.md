@@ -13,7 +13,7 @@ You need to install dependencies before JS modules from NPM
 Node-Canvas installation help: https://github.com/Automattic/node-canvas/wiki
 
 ```bash
-brew install cairo  # on OSX
+brew install cairo freetype  # on OSX
 npm install
 npm start
 ```
