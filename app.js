@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 
 // MongoDB module
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 
 // face-detection module
 // read requirements for installing node-canvas: https://github.com/Automattic/node-canvas/wiki
@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 //const Canvas = require('canvas');
 
 // MongoDB database model
-mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGODB_URI || 'localhost');
+// mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGODB_URI || 'localhost');
 const Face = require('./models/face');
 
 // set up web server

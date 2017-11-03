@@ -4,17 +4,30 @@ Code for workshop "Fun with getUserMedia(): Green Screens and Fever Dreams"
 
 Covers getUserMedia() and new ImageCapture browser APIs
 
-Plus some fun with TensorFlow, audio and video tags
+## Basic Dependencies
 
-## Dependencies
+You can run all of the examples except 'Reverse-Facebook' with JS modules from NPM
 
-You need to install dependencies before JS modules from NPM
+```
+npm install
+npm start
+```
+
+## Advanced dependencies
+
+To run the 'Reverse-Facebook' example, next install MongoDB and the dependencies for ```node-canvas```:
 
 Node-Canvas installation help: https://github.com/Automattic/node-canvas/wiki
 
 ```bash
-brew install cairo freetype  # on OSX
-npm install
+brew install mongodb cairo  # on OSX
+mongod &
+npm install mongoose canvas face-detect --save
+```
+
+In ```app.js```, un-comment the lines about ```mongoose```, ```fdetect```, or ```canvas```.
+
+```
 npm start
 ```
 
