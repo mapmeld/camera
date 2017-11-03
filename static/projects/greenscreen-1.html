@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>Green Screen Project</title>
+    <script src="/scripts/force-https.js"></script>
+    <link rel="stylesheet" href="/style.css"/>
+  </head>
+  <body>
+    <video id="video" autoplay>  </video>
+    <canvas id="canvas">  </canvas>
+    <button class="shutter" onclick="snap()">Photo</button>
+    <canvas id="blue-canvas"></canvas>
+
+    <script>
+    let video = document.getElementById("video"),
+        c = document.getElementById('canvas'),
+        ctx = c.getContext('2d'),
+        blue = document.getElementById('blue-canvas'),
+        bluectx = blue.getContext('2d');
+
+    // start showing video feed
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            video.srcObject = stream;
+        });
+
+    // button pressed!
+    function snap() {
+      // make canvas and video same size - no distortion
+      c.width = video.offsetWidth;
+      c.height = video.offsetHeight;
+
+      // drawing video to first canvas
+      ctx.drawImage(video, 0, 0);
+
+      // retrieving imageData
+      let idata = ctx.getImageData(0, 0, c.width, c.height);
+
+      for (var pixel = 0; pixel < (c.width * c.height); pixel++) {
+        let pindex = 4 * pixel;
+        let r = idata.data[pindex],
+            g = idata.data[pindex + 1],
+            b = idata.data[pindex + 2],
+            a = idata.data[pindex + 3];
+
+        if (b > 200 && g < b * 0.5 && r < b * 0.5
+          && g > 70 && b > 70) {
+          idata.data[pindex] = 0;
+          idata.data[pindex + 1] = 0;
+          idata.data[pindex + 2] = 254;
+          // idata.data[pindex + 3] = 0; // would make transparent section
+        }
+      }
+
+      blue.width = c.width;
+      blue.height = c.height;
+      bluectx.putImageData(idata, 0, 0);
+    }
+    </script>
+  </body>
+</html>

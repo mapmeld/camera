@@ -25,6 +25,14 @@ li > a {
   max-width: 280px;
 }
 
-video, canvas, img {
+video, canvas, img, audio {
   max-width: 100%;
+}
+
+audio {
+  display: block;
+}
+
+textarea {
+  font-size: 16pt;
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>Audio Examples</title>
+    <script src="/scripts/force-https.js"></script>
+    <link rel="stylesheet" href="/style.css"/>
+  </head>
+  <body>
+    <textarea id="mytext" rows="10"></textarea>
+
+    <audio id="audio" src="/audio.ogg" controls></audio>
+    <button onclick="play()">Play</button>
+    <button onclick="pause()">Pause</button>
+    <script>
+    let audio = document.getElementById('audio'),
+        mytext = document.getElementById('mytext'),
+        waittime = null;
+
+    mytext.onfocus = function() {
+      audio.play();
+    };
+    mytext.onblur = function() {
+      audio.pause();
+    };
+    mytext.onkeypress = function() {
+      if (waittime) {
+        clearTimeout(waittime);
+      }
+      audio.pause();
+      waittime = setTimeout(function() {
+        audio.play();
+      }, 500);
+    };
+    </script>
+  </body>
+</html>
