@@ -27,6 +27,6 @@
     "compression": "^1.7.1",
     "express": "^4.16.2",
     "jade": "^1.11.0",
-    "mongoose": "^4.12.5"
+    "mongoose": "^5.7.5"
   }
 }
