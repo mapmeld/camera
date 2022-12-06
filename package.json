@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/mapmeld/camera#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.20.1",
     "compression": "^1.7.1",
-    "express": "^4.16.2",
+    "express": "^4.18.2",
     "jade": "^1.11.0",
     "mongoose": "^5.7.5"
   }
